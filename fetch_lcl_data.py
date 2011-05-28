@@ -13,7 +13,8 @@ class LCLDataFetcher:
 		self._compte = compte
 		self._code = code
 		self._login_url = "https://particuliers.secure.lcl.fr/everest/UWBI/UWBIAccueil?DEST=IDENTIFICATION"
-		self._data_url = "https://particuliers.secure.lcl.fr/outil/UWLM/ListeMouvementsPar/accesListeMouvementsPar?agence=00474&compte=064596W&mode=06"
+		self._data_url = ("https://particuliers.secure.lcl.fr/outil/UWLM/ListeMouvementsPar/accesListeMouvementsPar?agence=%s&compte=%sW&mode=06"
+			%(agence, compte))
 		self._cj = cookielib.LWPCookieJar()
 		opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self._cj))
 		urllib2.install_opener(opener)
