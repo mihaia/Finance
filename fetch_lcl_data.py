@@ -5,6 +5,8 @@ import sqlite3
 import sys
 from sgmllib import SGMLParser
 
+DATABASE_FILE = '/code/cheltuilei'
+
 class LCLDataFetcher:
 	def __init__(self, agence, compte, code):
 		self._agence = agence
@@ -119,14 +121,20 @@ def ParseExpense(expense):
 	return [name, expense[1], category, expense[2]]
 
 def main():
-	fetcher = LCLDataFetcher('agence', 'compte', 'code')
+	if len(sys.argv) < 4:
+		sys.stderr.write('Usage: %s agence compte code [database_file]\n'%sys.argv[0])
+		sys.exit(1)
+	fetcher = LCLDataFetcher(sys.argv[1], sys.argv[2], sys.argv[3])
 	fetcher.UpdateCookie()
 	page = fetcher.GetAccountData()
 	#print page
 	parser = ExpenseLister()
 	parser.feed(page)
 	expenses = parser.get_expenses()
-	sql_writer = SQLWriter('/code/cheltuilei.db')
+	database_file = DATABASE_FILE
+	if len(sys.argv) == 5:
+		database_file = sys.argv[4]
+	sql_writer = SQLWriter(database_file)
 	new_expenses = []
 	processed_expenses = []
 	for expense in expenses:
