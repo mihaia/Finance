@@ -5,7 +5,7 @@ import sqlite3
 import sys
 from sgmllib import SGMLParser
 
-DATABASE_FILE = '/code/cheltuilei'
+DATABASE_FILE = 'cheltuilei'
 
 class LCLDataFetcher:
 	def __init__(self, agence, compte, code):
