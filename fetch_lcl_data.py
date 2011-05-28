@@ -119,7 +119,7 @@ def ParseExpense(expense):
 	return [name, expense[1], category, expense[2]]
 
 def main():
-	fetcher = LCLDataFetcher('0474', '064596W', '130184')
+	fetcher = LCLDataFetcher('agence', 'compte', 'code')
 	fetcher.UpdateCookie()
 	page = fetcher.GetAccountData()
 	#print page
