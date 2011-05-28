@@ -97,7 +97,14 @@ class SQLWriter:
 		cursor.close()
 		return True
 			
+def OneOfInName(item_list, name):
+	for item in item_list:
+		if item in name:
+			return True
+		return False
 def ParseExpense(expense):
+	restaurante = ['PIZZA', 'KFC', 'ALLORESTO']
+	facturi = ["PRLV GROUPAMA", "PRLV EDF", "PRLV Free", "PRLV VIRGIN"]
 	category = "no_category"
 	name = expense[1]
 	if "FRANPRIX" in name or "MONOPRIX" in name:
@@ -108,7 +115,7 @@ def ParseExpense(expense):
 		category = "ECONOMIE"
 	elif "ASSURANCE CAPITAL MULTICOMPTES" in name or "LCL A LA CARTE" in name:
 		category = "LCL"
-	elif "PRLV GROUPAMA" in name or "PRLV EDF" in name or "PRLV Free" in name or "PRLV VIRGIN" in name:
+	elif OneOfInName(facturi, name):
 		category = "FACTURI"
 	elif "AMAZON" in name:
 		category = "BOOKS & STUFF"
@@ -118,6 +125,8 @@ def ParseExpense(expense):
 		category = "CHIRIE"
 	elif "VIR" in name:
 		category = "DATORII"
+	elif OneOfInName(restaurante, name):
+		category = 'RESTAURANT'
 	return [name, expense[1], category, expense[2]]
 
 def main():
