@@ -110,6 +110,8 @@ def ParseExpense(expense):
 	name = expense[1]
 	if "FRANPRIX" in name or "MONOPRIX" in name:
 		category = "EPICERIE"
+        elif "TRUFFAUT" in name:
+                category = "FLEURS"
 	elif "RETRAIT" in name:
 		category = "CASH"
 	elif "VIREMENT AMARAND" in name:
